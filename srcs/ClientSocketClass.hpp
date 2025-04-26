@@ -6,6 +6,7 @@
 #include <sys/socket.h>
 #include <unistd.h>
 #include <netinet/in.h>
+#include "fcntl.h"
 
 class ClientSocket {
 
@@ -14,6 +15,7 @@ class ClientSocket {
 		~ClientSocket();
 
 		int connect(int listenFd);
+		int getFd();
 		void interact();
 		bool isConnected();
 

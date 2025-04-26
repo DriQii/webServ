@@ -8,6 +8,7 @@ ClientSocket::ClientSocket() : _connected(false)
 int ClientSocket::connect(int listenFd)
 {
 	_fd = accept(listenFd, (struct sockaddr *)&_addr, &_len);
+	fcntl(_fd, F_SETFL, O_NONBLOCK);
 	if (_fd == -1)
 		throw std::runtime_error("ERROR : Accept failed");
 	_connected = true;
@@ -17,6 +18,7 @@ int ClientSocket::connect(int listenFd)
 void ClientSocket::interact()
 {
 	char buffer[4096];
+	std::memset(buffer, 0, 4096);
 	std::string response =
     "HTTP/1.1 200 OK\r\n"
     "Content-Type: text/html\r\n"
@@ -28,6 +30,10 @@ void ClientSocket::interact()
 	send(_fd, response.c_str(), std::strlen(response.c_str()), 0);
 }
 
+int ClientSocket::getFd()
+{
+	return (_fd);
+}
 bool ClientSocket::isConnected()
 {
 	return (_connected);
