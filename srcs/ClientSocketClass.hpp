@@ -13,13 +13,15 @@ class ClientSocket {
 		ClientSocket();
 		~ClientSocket();
 
-		void connect(int listenFd);
+		int connect(int listenFd);
 		void interact();
+		bool isConnected();
 
 	private:
 		sockaddr_in _addr;
 		socklen_t 	_len;
 		int			_fd;
+		bool		_connected;
 };
 
 #endif

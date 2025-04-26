@@ -6,7 +6,7 @@
 #include <sys/socket.h>
 #include <unistd.h>
 #include <netinet/in.h>
-
+#include "fcntl.h"
 class ListenSocket {
 
 	public:
