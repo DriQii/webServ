@@ -1,29 +1,21 @@
 #ifndef CLIENT_SOCKETS_CLASS_HPP
 #define CLIENT_SOCKETS_CLASS_HPP
 
-#include <string>
-#include <iostream>
-#include <sys/socket.h>
-#include <unistd.h>
-#include <netinet/in.h>
-#include "fcntl.h"
+#include "ASocketClass.hpp"
 
-class ClientSocket {
+class ClientSocket : public ASocket {
 
 	public:
-		ClientSocket();
+		ClientSocket(int listenFd);
 		~ClientSocket();
 
-		int connect(int listenFd);
-		int getFd();
+		int connect();
 		void interact();
-		bool isConnected();
 
 	private:
-		sockaddr_in _addr;
 		socklen_t 	_len;
-		int			_fd;
-		bool		_connected;
+		int			_listenFd;
+		
 };
 
 #endif

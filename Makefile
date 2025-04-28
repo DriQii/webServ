@@ -8,7 +8,9 @@ OBJS_DIR = .objs
 
 LST_SRCS =	main.cpp \
 			ListenSocketClass.cpp \
-			ClientSocketClass.cpp
+			ClientSocketClass.cpp \
+			ASocketClass.cpp \
+			ServerClass.cpp
 LST_OBJS = $(LST_SRCS:.cpp=.o)
 
 

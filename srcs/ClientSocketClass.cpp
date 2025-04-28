@@ -1,13 +1,13 @@
 #include "ClientSocketClass.hpp"
 
-ClientSocket::ClientSocket() : _connected(false)
+ClientSocket::ClientSocket(int listenFd) : _listenFd(listenFd)
 {
 	_len = sizeof(_addr);
 }
 
-int ClientSocket::connect(int listenFd)
+int ClientSocket::connect()
 {
-	_fd = accept(listenFd, (struct sockaddr *)&_addr, &_len);
+	_fd = accept(_listenFd, (struct sockaddr *)&_addr, &_len);
 	fcntl(_fd, F_SETFL, O_NONBLOCK);
 	if (_fd == -1)
 		throw std::runtime_error("ERROR : Accept failed");
@@ -22,21 +22,12 @@ void ClientSocket::interact()
 	std::string response =
     "HTTP/1.1 200 OK\r\n"
     "Content-Type: text/html\r\n"
-    "Content-Length: 22\r\n"
+    "Content-Length: 37\r\n"
     "\r\n"
-    "<h1>Hello, world!</h1>";
+    "<h1>Hello from Webserv My broski</h1>";
 	recv(_fd, &buffer, 4096, 0);
-	std::cout << buffer << "buffer" << std::endl;
+	std::cout << buffer << std::endl;
 	send(_fd, response.c_str(), std::strlen(response.c_str()), 0);
-}
-
-int ClientSocket::getFd()
-{
-	return (_fd);
-}
-bool ClientSocket::isConnected()
-{
-	return (_connected);
 }
 
 ClientSocket::~ClientSocket()

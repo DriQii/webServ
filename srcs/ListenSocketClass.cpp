@@ -2,7 +2,14 @@
 
 ListenSocket::ListenSocket()
 {
-	std::memset(&_addr, 0, sizeof(_addr));
+}
+
+ListenSocket::~ListenSocket()
+{
+}
+
+int ListenSocket::connect()
+{
 	_addr.sin_family = AF_INET;
 	_addr.sin_port = htons(8080);
 	_addr.sin_addr.s_addr = htonl(INADDR_ANY);
@@ -16,14 +23,5 @@ ListenSocket::ListenSocket()
 		throw std::runtime_error("ERROR : Bind failed");
 	if (listen(_fd, 5) == -1)
 		throw std::runtime_error("ERROR : Listen failed");
-}
-
-int ListenSocket::getFd()
-{
-	return _fd;
-}
-
-ListenSocket::~ListenSocket()
-{
-	close(_fd);
+	return (_fd);
 }
