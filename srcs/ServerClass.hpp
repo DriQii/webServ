@@ -12,7 +12,8 @@ class Server {
 		Server();
 		~Server();
 
-		void launch();
+		void	launchListenSocket();
+		void	pollLoop();
 
 	private :
 

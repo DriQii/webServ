@@ -10,7 +10,7 @@ Server::~Server()
 
 }
 
-void	Server::_launchListenSocket()
+void	Server::launchListenSocket()
 {
 	pollfd pnode;
 
@@ -31,18 +31,10 @@ void	Server::_createClient()
 	_nbClients++;
 }
 
-void	Server::_pollLoop()
+void	Server::pollLoop()
 {
 	poll(&_pollVec[0], _nbClients + 1, 1000);
 	for (size_t i = 0; i < _nbClients + 1; i++)
 		if (_pollVec[i].revents == POLLIN)
 			i == 0 ?  _createClient() : _clientSocks[i-1]->interact();
-}
-
-void	Server::launch()
-{
-	_launchListenSocket();
-	while(true)
-		_pollLoop();
-
 }
