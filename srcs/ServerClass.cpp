@@ -1,4 +1,4 @@
-#include "ServerClass.hpp"
+#include <ServerClass.hpp>
 
 Server::Server() : _nbClients(0), _fdLSock(0)
 {

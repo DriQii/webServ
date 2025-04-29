@@ -1,7 +1,7 @@
 NAME = webServ
 
 CC = c++
-CFLAGS = -Wall -Wextra -Werror -g -std=c++98
+CFLAGS = -Wall -Wextra -Werror -g -std=c++98 -I include
 
 SRCS_DIR = srcs
 OBJS_DIR = .objs
