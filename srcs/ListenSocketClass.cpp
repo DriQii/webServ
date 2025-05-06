@@ -23,5 +23,6 @@ int ListenSocket::connect()
 		throw std::runtime_error("ERROR : Bind failed");
 	if (listen(_fd, 5) == -1)
 		throw std::runtime_error("ERROR : Listen failed");
+	_connected = true;
 	return (_fd);
 }

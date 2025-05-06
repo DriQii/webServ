@@ -2,6 +2,7 @@
 #define CLIENT_SOCKETS_CLASS_HPP
 
 #include "ASocketClass.hpp"
+#include "RequestClass.hpp"
 
 class ClientSocket : public ASocket {
 
@@ -15,7 +16,7 @@ class ClientSocket : public ASocket {
 	private:
 		socklen_t 	_len;
 		int			_listenFd;
-		
+
 };
 
 #endif

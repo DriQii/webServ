@@ -17,16 +17,15 @@ int ClientSocket::connect()
 
 void ClientSocket::interact()
 {
-	char buffer[4096];
-	std::memset(buffer, 0, 4096);
 	std::string response =
     "HTTP/1.1 200 OK\r\n"
     "Content-Type: text/html\r\n"
     "Content-Length: 37\r\n"
     "\r\n"
     "<h1>Hello from Webserv My broski</h1>";
-	recv(_fd, &buffer, 4096, 0);
-	std::cout << buffer << std::endl;
+	Request request;
+	request.receive(_fd);
+	request.show();
 	send(_fd, response.c_str(), std::strlen(response.c_str()), 0);
 }
 
