@@ -11,8 +11,9 @@ LST_SRCS =	main.cpp \
 			ClientSocketClass.cpp \
 			ASocketClass.cpp \
 			ServerClass.cpp \
-			RequestClass.cpp
-			
+			RequestClass.cpp \
+			ResponseClass.cpp
+
 LST_OBJS = $(LST_SRCS:.cpp=.o)
 
 

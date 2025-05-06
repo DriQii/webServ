@@ -3,6 +3,9 @@
 
 #include "ASocketClass.hpp"
 #include "RequestClass.hpp"
+#include "ResponseClass.hpp"
+#include <fstream>
+#include <sstream>
 
 class ClientSocket : public ASocket {
 

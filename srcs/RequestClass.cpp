@@ -22,11 +22,11 @@ void	Request::receive(int fd)
 	next = _requestStr.find(' ');
 	pos = next + 1;
 
-	_requestMap["type"] = _requestStr.substr(0, next);
+	_requestLine["type"] = _requestStr.substr(0, next);
 	next = _requestStr.find(' ', pos);
-	_requestMap["path"] = _requestStr.substr(pos, next - pos);
+	_requestLine["path"] = _requestStr.substr(pos, next - pos);
 	next = _requestStr.find("\r\n", next) + 2;
-	
+
 	while (true)
 	{
 		pos = next;
@@ -41,16 +41,21 @@ void	Request::receive(int fd)
 void Request::show()
 {
 	std::cout << "----REQUEST----\n"
-	<< "TYPE : " << _requestMap["type"]
-	<< "\nPATH : " << _requestMap["path"]
+	<< "TYPE : " << _requestLine["type"]
+	<< "\nPATH : " << _requestLine["path"]
 	<< "\n---HEADERS----"
 	<< "\nHost : " << _headers["Host"]
 	<< "\nAccept : " << _headers["Accept"]
 	<< "\n--------------\n" << std::endl;
-
 }
-void Request::show(std::string arg)
+
+std::string Request::getRLine(std::string arg)
 {
-	std::cout << arg << " : " << _requestMap[arg] << std::endl;
+	return (_requestLine[arg]);
+}
+
+std::string Request::getHeader(std::string arg)
+{
+	return (_headers[arg]);
 }
 

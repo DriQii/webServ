@@ -17,16 +17,10 @@ int ClientSocket::connect()
 
 void ClientSocket::interact()
 {
-	std::string response =
-    "HTTP/1.1 200 OK\r\n"
-    "Content-Type: text/html\r\n"
-    "Content-Length: 37\r\n"
-    "\r\n"
-    "<h1>Hello from Webserv My broski</h1>";
-	Request request;
+	Request		request;
 	request.receive(_fd);
-	request.show();
-	send(_fd, response.c_str(), std::strlen(response.c_str()), 0);
+	Response	response(request.getRLine("path"));
+	send(_fd, response.str().c_str(), response.str().size(), 0);
 }
 
 ClientSocket::~ClientSocket()
